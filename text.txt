@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Valentino ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(135deg, #ffb3b3, #ff4d4d);
+  overflow: hidden;
+}
+
+/* Cuoricini */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float 6s linear infinite;
+  opacity: 0.7;
+  color: red;
+}
+@keyframes float {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-800px); opacity: 0; }
+}
+
+.container {
+  text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+h1 {
+  color: red;
+}
+
+button {
+  font-size: 20px;
+  padding: 12px 30px;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yes {
+  background: red;
+  color: white;
+}
+
+#no {
+  background: #eee;
+  position: absolute;
+}
+
+/* Cricetino */
+#hamster {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 100px;
+  display: none;
+  animation: clap 0.6s infinite alternate;
+}
+
+@keyframes clap {
+  0% { transform: rotate(-10deg) scale(1); }
+  100% { transform: rotate(10deg) scale(1.1); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Vuoi essere il mio valentino? ❤️</h1>
+  <button id="yes">Sì ❤️</button>
+  <button id="no">No 🙄</button>
+</div>
+
+<div id="hamster">🐹👏</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const hamster = document.getElementById("hamster");
+
+let attempts = 0;
+
+// NO che scappa
+noBtn.addEventListener("mouseover", () => {
+  attempts++;
+
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  if (attempts >= 3) {
+    noBtn.style.transform = "scale(0.6)";
+  }
+
+  if (attempts >= 5) {
+    noBtn.style.display = "none";
+  }
+});
+
+// SÌ cliccato → cricetino appare
+yesBtn.addEventListener("click", () => {
+  hamster.style.display = "block";
+});
+
+// Cuoricini
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.bottom = "-20px";
+  heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
